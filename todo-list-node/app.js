@@ -5,6 +5,7 @@ const path = require("path");
 const header = require("./fw/header");
 const footer = require("./fw/footer");
 const login = require("./login");
+const register = require("./register");
 const index = require("./index");
 const adminUser = require("./admin/users");
 const editTask = require("./edit");
@@ -89,6 +90,14 @@ app.get("/logout", (req, res) => {
   res.cookie("username", "");
   res.cookie("userid", "");
   res.redirect("/login");
+});
+
+app.get("/register", async (req, res) => {
+  res.send(await register.html(req));
+});
+
+app.post("/register", async (req, res) => {
+  res.send(await register.html(req));
 });
 
 // Profilseite anzeigen

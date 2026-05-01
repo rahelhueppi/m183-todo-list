@@ -89,7 +89,8 @@ function getHtml() {
             <label for="submit" ></label>
             <input id="submit" type="submit" class="btn size-auto" value="Login" />
         </div>
-    </form>`;
+    </form>
+    <a href="/register">Register</a>`;
 }
 
 module.exports = {
