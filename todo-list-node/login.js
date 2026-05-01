@@ -39,12 +39,9 @@ async function validateLogin(username, password) {
   // Connect to the database
   const dbConnection = await db.connectDB();
 
-  const sql =
-    `SELECT id, username, password FROM users WHERE username='` +
-    username +
-    `'`;
+  const sql = "SELECT id, username, password FROM users WHERE username = ?";
   try {
-    const [results, fields] = await dbConnection.query(sql);
+    const [results] = await dbConnection.execute(sql, [username]);
 
     if (results.length > 0) {
       // Bind the result variables
