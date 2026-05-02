@@ -1,6 +1,7 @@
 function getHtml() {
-    return `</main>
+  return `</main>
 <footer>
+    <a href="/deleteUser">Delete Account</a>
     &copy;TBZ
 </footer>
 

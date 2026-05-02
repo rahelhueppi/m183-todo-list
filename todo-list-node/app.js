@@ -12,6 +12,7 @@ const editTask = require("./edit");
 const saveTask = require("./savetask");
 const search = require("./search");
 const searchProvider = require("./search/v2/index");
+const deleteUser = require("./deleteUser");
 
 const app = express();
 const PORT = 3000;
@@ -98,6 +99,22 @@ app.get("/register", async (req, res) => {
 
 app.post("/register", async (req, res) => {
   res.send(await register.html(req));
+});
+
+// show deleteUser
+app.get("/deleteUser", async (req, res) => {
+  if (activeUserSession(req)) {
+    let html = await wrapContent(deleteUser.getHtml(), req);
+    res.send(html);
+  } else {
+    res.redirect("/login");
+  }
+});
+
+// execute deleteUser
+app.post("/deleteUser", async (req, res) => {
+  let html = await deleteUser.handleDeleteUser(req, res);
+  res.send(html);
 });
 
 // Profilseite anzeigen
