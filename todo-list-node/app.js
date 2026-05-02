@@ -73,6 +73,11 @@ app.get("/edit", async (req, res) => {
 
 // Login-Seite anzeigen
 app.get("/login", async (req, res) => {
+  let html = await wrapContent(login.getHtml(), req);
+  res.send(html);
+});
+
+app.post("/login", async (req, res) => {
   let content = await login.handleLogin(req, res);
 
   if (content.user.userid !== 0) {

@@ -5,21 +5,21 @@ async function handleLogin(req, res) {
   let msg = "";
   let user = { username: "", userid: 0 };
 
-  if (
-    typeof req.query.username !== "undefined" &&
-    typeof req.query.password !== "undefined"
-  ) {
-    // Get username and password from the form and call the validateLogin
-    let result = await validateLogin(req.query.username, req.query.password);
+  const username = req.body?.username;
+  const password = req.body?.password;
 
-    if (result.valid) {
-      // Login is correct. Store user information to be returned.
-      user.username = req.query.username;
-      user.userid = result.userId;
-      msg = result.msg;
-    } else {
-      msg = result.msg;
-    }
+  if (!username || !password) {
+    return { html: getHtml(), user: user };
+  }
+
+  let result = await validateLogin(username, password);
+
+  if (result.valid) {
+    user.username = username;
+    user.userid = result.userId;
+    msg = result.msg;
+  } else {
+    msg = result.msg;
   }
 
   return { html: msg + getHtml(), user: user };
@@ -79,7 +79,7 @@ function getHtml() {
   return `
     <h2>Login</h2>
 
-    <form id="form" method="get" action="/login">
+    <form id="form" method="post" action="/login">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control size-medium" name="username" id="username">
@@ -99,4 +99,5 @@ function getHtml() {
 module.exports = {
   handleLogin: handleLogin,
   startUserSession: startUserSession,
+  getHtml,
 };
