@@ -66,7 +66,6 @@ async function validateLogin(username, password) {
       result.msg = "Username does not exist";
     }
 
-    console.log(results); // results contains rows returned by server
     //console.log(fields); // fields contains extra meta data about results, if available
   } catch (err) {
     console.log(err);
