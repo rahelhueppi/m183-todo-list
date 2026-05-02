@@ -1,4 +1,5 @@
 const db = require("./fw/db");
+const bcrypt = require("bcrypt");
 
 async function handleLogin(req, res) {
   let msg = "";
@@ -49,8 +50,10 @@ async function validateLogin(username, password) {
       let db_username = results[0].username;
       let db_password = results[0].password;
 
+      const passwordOk = await bcrypt.compare(password, db_password);
+
       // Verify the password
-      if (password == db_password) {
+      if (passwordOk) {
         result.userId = db_id;
         result.valid = true;
         result.msg = "login correct";

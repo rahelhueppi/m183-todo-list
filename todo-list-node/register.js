@@ -1,4 +1,5 @@
 const db = require("./fw/db");
+const bcrypt = require("bcrypt");
 
 async function getHtml(req) {
   let html = "";
@@ -7,11 +8,13 @@ async function getHtml(req) {
     const username = req.body.username;
     const password = req.body.password;
 
+    const hash = await bcrypt.hash(password, 10);
+
     const dbConnection = await db.connectDB();
 
     await dbConnection.execute(
       "INSERT INTO users (username, password) VALUES (?, ?)",
-      [username, password],
+      [username, hash],
     );
 
     html += "<span class='info info-success'>User created</span>";

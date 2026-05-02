@@ -126,12 +126,15 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+/*(1, 'admin1', 'Awesome.Pass34');*/
+/*(2, 'user1', 'Amazing.Pass23');*/
+
 insert into roles (ID, title) values (2, 'User');
 insert into roles (ID, title) values (1, 'Admin');
 
 
-insert into users (ID, username, password) values (1, 'admin1', 'Awesome.Pass34');
-insert into users (ID, username, password) values (2, 'user1', 'Amazing.Pass23');
+insert into users (ID, username, password) values (1, 'admin1', '$2b$10$gKlGZKDhZdaIV9mnvX05vOnMalo6.NyM/vOWM6Nio79jkw7mn7fT2');
+insert into users (ID, username, password) values (2, 'user1', '$2b$10$KPyVOpaKlxAh2Qy1.zEBYO9XWdZ4CxqFI7keZHif0nGn8VvHNfPjC');
 
 insert into permissions(ID, userID, roleID) values(null, 1, 1);
 insert into permissions(ID, userID, roleID) values(null, 2, 2);
